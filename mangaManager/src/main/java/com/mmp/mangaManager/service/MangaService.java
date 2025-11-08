@@ -2,27 +2,25 @@ package com.mmp.mangaManager.service;
 
 import com.mmp.mangaManager.domain.Manga;
 import com.mmp.mangaManager.domain.enums.Status;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class MangaService {
-    private List<Manga> mangas;
+    private List<Manga> mangas = new ArrayList<>();
+    private String fileName = "mangas.csv";
+    private InputStream is = getClass().getClassLoader().getResourceAsStream(fileName);
 
     public MangaService() {
-        this.mangas = loadMangasFromCsv("mangas.csv");
+        this.mangas = loadMangasFromCsv();
     }
 
-    private List<Manga> loadMangasFromCsv(String fileName) {
+    private List<Manga> loadMangasFromCsv() {
         try{
-            InputStream is = getClass().getClassLoader().getResourceAsStream(fileName);
             if (is == null) {
                 throw new RuntimeException("Nie znaleziono pliku: " + fileName);
             }
@@ -36,7 +34,7 @@ public class MangaService {
                             String title = data[1];
                             String author = data[2];
                             Integer year = Integer.parseInt(data[3]);
-                            Status status = Status.valueOf(data[4].trim().toUpperCase());
+                            Status status = Status.valueOf(data[4]);
 
                             return new Manga(id, title, author, year, status);
                         })
@@ -48,5 +46,19 @@ public class MangaService {
 
     public List<Manga> getAllMangas() {
         return mangas;
+    }
+
+    public void addManga(String title, String author, Integer year, Status status) {
+        Integer id = mangas.size() + 1;
+        String line = id.toString() + "," + title + "," + author + "," + year.toString() + "," + status.toString();
+        try {
+            File file = new ClassPathResource(fileName).getFile();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+                writer.newLine();
+                writer.write(line);
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }

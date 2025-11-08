@@ -12,5 +12,4 @@ public class Manga {
     private String author;
     private Integer year;
     private Status status;
-
 }
