@@ -1,0 +1,6 @@
+services:
+  manga:
+    build: ./mangaManager
+    container_name: mangaManager
+    ports:
+      - "8080:8080"
