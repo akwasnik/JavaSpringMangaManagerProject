@@ -1,13 +1,13 @@
 const axios = require('axios');
 
-axios.get("https://localhost:8080").then(d =>{
+axios.get("http://mangamanagerapi:8080/mangas").then(d =>{
     console.log(d.data);
 })
 
-axios.post("https://localhost:8080",{title: "test", author: "1test1", year: 2004, status: "ONGOING"}).then(d =>{
+axios.post("http://mangamanagerapi:8080/mangas",{title: "test", author: "1test1", year: 2004, status: "ONGOING"}).then(d =>{
     console.log(d.data);
 })
 
-axios.get("https://localhost:8080").then(d =>{
+axios.get("http://mangamanagerapi:8080/mangas").then(d =>{
     console.log(d.data);
 })

@@ -6,6 +6,7 @@ import com.mmp.mangaManager.service.MangaService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/mangas")
@@ -24,8 +25,12 @@ public class MangaController {
     }
 
     @PostMapping
-    public String addManga(@RequestBody String title,@RequestBody String author, @RequestBody Integer year, @RequestBody String statusValue){
+    public String addManga(@RequestBody Map<String,Object> body){
         System.out.println("Requested mangas POST");
+        String title = (String) body.get("title");
+        String author = (String) body.get("author");
+        Integer year = (Integer) body.get("year");
+        String statusValue = (String) body.get("status");
         Status status = Status.valueOf(statusValue);
         mangaService.addManga(title,author,year,status);
         return "Added manga "+title;
