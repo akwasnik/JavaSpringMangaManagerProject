@@ -10,8 +10,5 @@ import org.springframework.context.ApplicationContext;
 public class MangaManagerApplication {
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(MangaManagerApplication.class, args);
-        MangaService ms = ctx.getBean(MangaService.class);
-        ms.addManga("tte","sat",1234,Status.COMPLETED);
-        System.out.println(ms.getAllMangas());
     }
 }

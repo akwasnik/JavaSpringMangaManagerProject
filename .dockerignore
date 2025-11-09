@@ -1,0 +1,17 @@
+# Gradle i IDE
+.gradle
+build
+out
+.idea
+*.iml
+
+# Systemowe
+*.log
+*.tmp
+
+# Git
+.git
+.gitignore
+
+# Dockerfile sam się kopiuje
+Dockerfile
