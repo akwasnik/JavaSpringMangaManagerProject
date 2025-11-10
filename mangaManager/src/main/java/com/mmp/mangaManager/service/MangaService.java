@@ -2,24 +2,30 @@ package com.mmp.mangaManager.service;
 
 import com.mmp.mangaManager.domain.Manga;
 import com.mmp.mangaManager.domain.enums.Status;
+import com.mmp.mangaManager.repository.MangaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
 
 @Service
 public class MangaService {
-    private List<Manga> mangas = new ArrayList<>();
+
+    private final MangaRepository mangaRepository;
+
+    public MangaService(MangaRepository mangaRepository) {
+        this.mangaRepository = mangaRepository;
+    }
 
     public List<Manga> getAllMangas() {
-        return mangas;
+        return mangaRepository.findAll();
     }
 
-    public void addManga(String title, String author, Integer year, Status status) {
-
+    public Manga addManga(String title, String author, Integer year, Status status) {
+        Manga manga = new Manga(title, author, year, status);
+        return mangaRepository.save(manga);
     }
 
-    public static void main(String[] args) {
-        System.out.println(new MangaService().getAllMangas());
+    public void deleteManga(String id) {
+        mangaRepository.deleteById(id);
     }
-
 }

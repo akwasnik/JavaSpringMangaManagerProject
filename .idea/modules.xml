@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/JavaSpringMangaManagerProject.iml" filepath="$PROJECT_DIR$/.idea/JavaSpringMangaManagerProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mangaManager.main.iml" filepath="$PROJECT_DIR$/.idea/modules/mangaManager.main.iml" />
     </modules>
   </component>
 </project>
